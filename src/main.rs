@@ -1,6 +1,8 @@
 pub mod grid;
 pub mod models;
+pub mod storages;
 pub mod traits;
+pub mod algorithm;
 
 use crate::models::*;
 

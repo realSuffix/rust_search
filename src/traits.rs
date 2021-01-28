@@ -8,6 +8,7 @@ pub trait Obstacle {
 /// algorithms.
 pub trait Storage<T> {
     fn empty(&self) -> bool;
-    fn pop(&mut self) -> T;
-    fn push(&mut self);
+    fn pop(&mut self) -> Option<T>;
+    fn push(&mut self, node: T);
+    fn new() -> Self;
 }
