@@ -1,15 +1,23 @@
 use crate::grid::Grid;
-use crate::obstacle::Obstacle;
+use crate::traits::*;
 use rand::distributions::{Distribution, Uniform};
+use crate::models::Node;
 use std::fmt;
 
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
-pub enum Node {
-    Empty,
-    Obstacle,
-    Start,
-    Goal,
-    Path,
+impl Node {
+    pub fn new_grid(size: usize, dispersion: f32) -> Grid<Self>{
+        let mut rng = rand::thread_rng();
+        let range = Uniform::from(0.0..1.0);
+
+        Grid::new(size, || {
+            let curr = range.sample(&mut rng);
+            if curr < dispersion {
+                Node::Obstacle
+            } else {
+                Node::Empty
+            }
+        })
+    }
 }
 
 impl Obstacle for Node {
@@ -20,20 +28,6 @@ impl Obstacle for Node {
             Some(self)
         }
     }
-}
-
-pub fn init_node_grid(size: usize, dispersion: f32) -> Grid<Node> {
-    let mut rng = rand::thread_rng();
-    let range = Uniform::from(0.0..1.0);
-
-    Grid::new(size, || {
-        let curr = range.sample(&mut rng);
-        if curr < dispersion {
-            Node::Obstacle
-        } else {
-            Node::Empty
-        }
-    })
 }
 
 impl fmt::Display for Node {

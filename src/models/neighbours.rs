@@ -1,18 +1,6 @@
 use std::fmt::Debug;
 use std::iter::IntoIterator;
-
-/// A location.
-/// First value is y, second value is x.
-pub struct Location(pub usize, pub usize);
-
-#[derive(Debug)]
-pub struct Neighbours<'a, T> {
-    pub left: Option<&'a T>,
-    pub right: Option<&'a T>,
-    pub top: Option<&'a T>,
-    pub bottom: Option<&'a T>,
-}
-
+use crate::models::Neighbours;
 
 impl<'a, T> Neighbours<'a, T>
 where

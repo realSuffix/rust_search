@@ -1,5 +1,5 @@
-use crate::misc::*;
-use crate::obstacle::Obstacle;
+use crate::models::*;
+use crate::traits::*;
 use std::fmt;
 use std::fmt::Debug;
 
